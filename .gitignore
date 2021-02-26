@@ -1,3 +1,8 @@
+# idy
+.idea/
+cmake-build-debug/
+CMakeLists.txt
+/main.cpp
 #mac
 .DS_Store
 
