@@ -1,3 +1,9 @@
+#mac
+.DS_Store
+
+#Clion
+.clang-format
+
 # Prerequisites
 *.d
 
