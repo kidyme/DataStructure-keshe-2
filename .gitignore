@@ -1,7 +1,8 @@
 # idy
 .idea/
 cmake-build-debug/
-CMakeLists.txt
+/CMakeLists.txt
+/.clang-format
 /main.cpp
 #mac
 .DS_Store
