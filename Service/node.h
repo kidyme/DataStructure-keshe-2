@@ -16,6 +16,8 @@
  *      获取键的个数
  *      判断辅导员是否已经填写过属性
  * 对于对象：
+ *      获取当前通过状态
+ *      审核通过
  *      获取Node类型
  *      设置id(在Utils中设计算法)
  *      填写值
@@ -28,46 +30,52 @@
  *      修改next和prior
  *      获取next和prior
  */
-template <class T> class Node {
+template<class T>
+class Node {
 public:
-  Node();
-  ~Node();
-  string getType();
-  void write(vector<string> input);
-  void write(int index, string value);
-  void read();
-  void update(int keyIndex, string value);
-  void addOwnKey(string key);
-  void updateOwnKey(int index,string key);
-  void removeOwnKey(int index);
+    Node();
+    ~Node();
 
-  void setId(int id);
-  void setNext(Node *newNext) { next = newNext; }
-  void setPrior(Node *newPrior) { prior = newPrior; }
-  Node *Next() { return next; }
-  Node *Prior() { return prior; }
+    void pass();
+    bool getPassStatus() { return status; }
+    string getType();
 
-  static void setKeys(vector<string> input);
-  static void addKey(string key);
-  // Service层调用此函数后，必须要遍历List，调用Node的addOwnKey("xxxx")
-  static void updateKey(int index, string key);
-  // Service层调用此函数后，必须要遍历List，调用Node的updateOwnKey("xxxx")
-  static void removeKey(int index);
-  // Service层调用此函数后，必须要遍历List，调用Node的removeOwnKey("xxxx")
-  static vector<string> getKeys();
-  static int getSize();
-  static int getHasTeacherWriten();
+    void write(vector<string> input);
+    void write(int index, string value);
+    void read();
+    void update(int keyIndex, string value);
+    void addOwnKey(string key);
+    void updateOwnKey(int index, string key);
+    void removeOwnKey(int index);
+
+    void setDataId(string id) { dataId = id; }
+    void setStudentId(string id) { studentId = id; }
+    void setNext(Node *newNext) { next = newNext; }
+    void setPrior(Node *newPrior) { prior = newPrior; }
+    Node *Next() { return next; }
+    Node *Prior() { return prior; }
+
+    static void setKeys(vector<string> input);
+    static void addKey(string key);
+    // Service层调用此函数后，必须要遍历List，调用Node的addOwnKey("xxxx")
+    static void updateKey(int index, string key);
+    // Service层调用此函数后，必须要遍历List，调用Node的updateOwnKey("xxxx")
+    static void removeKey(int index);
+    // Service层调用此函数后，必须要遍历List，调用Node的removeOwnKey("xxxx")
+    static vector<string> getKeys();
+    static int getSize();
+    static int getHasTeacherWriten();
 
 private:
-  void
-  setOwnKeys(); // 若keys已被填写才能在构造函数调用，用于properties变量的赋值
-
-  static bool hasTeacherWriten; // 辅导员是否填写了属性
-  static vector<string> keys;
-  int id;
-  Map properties;
-  Node *next;
-  Node *prior;
+    void setOwnKeys();           // 若keys已被填写才能在构造函数调用，用于properties变量的赋值
+    static bool hasTeacherWriten;// 辅导员是否填写了属性
+    static vector<string> keys;
+    string dataId;
+    string studentId;
+    bool status;// 审核状态
+    Map properties;
+    Node *next;
+    Node *prior;
 };
 
-#endif // KESHE_2_CPP_NODE_H
+#endif// KESHE_2_CPP_NODE_H

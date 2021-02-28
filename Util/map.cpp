@@ -33,11 +33,10 @@ void Map::setValue(int index, string value) { values[index] = value; }
 
 void Map::setValues(vector<string> input) { values = input; }
 
-void Map::show() {
+void Map::read() {
   for (int i = 0; i < keys.size(); ++i) {
     cout << keys[i] << " : " << values[i] << endl;
   }
-  cout << "----------" << endl;
 }
 
 bool Map::isCompleted() {

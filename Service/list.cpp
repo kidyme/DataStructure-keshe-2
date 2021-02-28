@@ -13,9 +13,6 @@ List<Data>::List() {
 template<class Data>
 List<Data>::~List() {}
 
-// template <class Data> void List<Data>::setNewKeysOfEveryNode() {
-//}
-
 template<class Data>
 void List<Data>::add() {
     if (head->getHasTeacherWriten()) {
@@ -184,5 +181,25 @@ void List<Data>::remove(bool isAssistant) {
             tmp->Next()->removeOwnKey(index);
             tmp = tmp->Next();
         }
+    }
+}
+
+template<class Data>
+void List<Data>::verify() {
+    Data *tmp = head;
+    int i = 1;
+    string input;
+    cout << "请轮流查看每个学生所填信息并审核" << endl;
+    while (tmp->Next()) {
+        if (!tmp->Next()->getPassStatus()) {
+            read(i);
+            cout << "通过输入y, 不通过输入n: ";
+            cin >> input;
+            if (input == "y") {
+                tmp->Next()->pass();
+            }
+        }
+        tmp = tmp->Next();
+        i++;
     }
 }

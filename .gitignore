@@ -4,6 +4,7 @@ cmake-build-debug/
 /CMakeLists.txt
 /.clang-format
 /main.cpp
+Data/*
 #mac
 .DS_Store
 

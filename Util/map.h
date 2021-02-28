@@ -22,23 +22,20 @@ using namespace std;
  */
 class Map {
 public:
-  Map();
-  ~Map();
-  void setKeys(vector<string> input);
-  void addKey(string key);
-  void updateKey(int index, string key);
-  void removeKey(int index);
+    Map();
+    ~Map();
+    void setKeys(vector<string> input);
+    void addKey(string key);
+    void updateKey(int index, string key);
+    void removeKey(int index);
 
-  void setValues(vector<string> input);
-  void setValue(int index, string value);
-  void show();
-  bool isCompleted();
+    void setValues(vector<string> input);
+    void setValue(int index, string value);
+    void read();
+    bool isCompleted();
 
 private:
-  vector<string> keys;
-  vector<string> values;
+    vector<string> keys;
+    vector<string> values;
 };
-#endif // KESHE_2_CPP_MAP_H
-
-//    string getValue(string key);
-//    void setValue(string key, string value);
+#endif// KESHE_2_CPP_MAP_H
