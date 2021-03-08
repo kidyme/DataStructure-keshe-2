@@ -14,15 +14,69 @@ template<class Data>
 List<Data>::~List() {}
 
 template<class Data>
+Data *List<Data>::getNode(int index) {
+    Data *tmp = head;
+    for (int i = 0; i < index; ++i) {
+        tmp = tmp->Next();
+    }
+
+    return tmp;
+}
+
+template<class Data>
+vector<string> List<Data>::getKeys() {
+    return head->getKeys();
+}
+
+template<class Data>
+int List<Data>::getLength() {
+    int length = 0;
+    Data *tmp = head;
+    while (tmp->Next()) {
+        length++;
+        tmp = tmp->Next();
+    }
+    return length;
+}
+
+template<class Data>
+void List<Data>::add(Data &newNode) {
+    if (!head->Next()) {
+        newNode.setNext(NULL);
+        newNode.setPrior(head);
+
+        head->setNext(&newNode);
+        head->setPrior(&newNode);
+    }
+    else {
+        newNode.setNext(NULL);
+        newNode.setPrior(head->Prior());
+
+        Data *last = head->Prior();
+        last->setNext(&newNode);
+        head->setPrior(&newNode);
+    }
+}
+
+template<class Data>
 void List<Data>::add() {
     if (head->getHasTeacherWriten()) {
-        //        printf("调用\n");
+        string stuId;
+        string stuName;
+        cout << "请输入" << endl;
+        cout << "学生Id: ";
+        cin >> stuId;
+        cout << "姓名: ";
+        cin >> stuName;
+
         Data *newNode = new Data();
         string input;
         vector<string> values;
 
+        newNode->setStudentId(stuId);
+        newNode->setStudentName(stuName);
+
         vector<string> keys = head->getKeys();
-        cout << "请输入" << endl;
         for (int i = 0; i < keys.size(); ++i) {
             cout << keys[i] << ": ";
             cin >> input;
@@ -57,6 +111,7 @@ void List<Data>::read(int index) {
     for (int i = 0; i < index; ++i) {
         tmp = tmp->Next();
     }
+
     tmp->read();
 }
 
@@ -72,23 +127,44 @@ void List<Data>::read() {
 template<class Data>
 void List<Data>::update(int index) {
     vector<string> keys = head->getKeys();
-    for (int i = 0; i < keys.size(); ++i) {
-        cout << i + 1 << ". " << keys[i] << endl;
+    cout << "1. 学生Id" << endl;
+    cout << "2. 姓名" << endl;
+    for (int i = 2; i < keys.size() + 2; ++i) {
+        cout << i + 1 << ". " << keys[i - 2] << endl;
     }
     cout << "请选择要修改的属性值: ";
     int inputIndex;
-    cin >> inputIndex;
-    inputIndex--;
     string inputValue;
+    cin >> inputIndex;
+
+    if (inputIndex < 1 || inputIndex > keys.size()) {
+        cout << "输入错误!" << endl;
+        return;
+    }
+
+    inputIndex -= 3;
+
     cout << "请输入" << endl
-         << keys[inputIndex] << ": ";
+         << (inputIndex ==
+                             (-2)
+                     ? "学生Id"
+                     : (inputIndex == (-1) ? "姓名" : keys[inputIndex]))
+         << ": ";
     cin >> inputValue;
 
     Data *tmp = head;
     for (int i = 0; i < index; ++i) {
         tmp = tmp->Next();
     }
-    tmp->update(inputIndex, inputValue);
+    if (inputIndex == -2) {
+        tmp->setStudentId(inputValue);
+    }
+    else if (inputIndex == -1) {
+        tmp->setStudentName(inputValue);
+    }
+    else {
+        tmp->update(inputIndex, inputValue);
+    }
 }
 
 template<class Data>
@@ -101,6 +177,11 @@ void List<Data>::remove(int index) {
     tmp->Prior()->setNext(tmp->Next());
     tmp->Next()->setPrior(tmp->Prior());
     delete tmp;
+}
+
+template<class Data>
+void List<Data>::add(vector<string> keys) {
+    head->setKeys(keys);
 }
 
 template<class Data>
@@ -159,6 +240,21 @@ void List<Data>::update(bool isAssistant) {
     while (tmp->Next()) {
         tmp->Next()->updateOwnKey(index, input);
         tmp = tmp->Next();
+    }
+}
+
+template<class Data>
+void List<Data>::update(vector<string> keys) {
+    head->setKeys(keys);
+
+    Data *tmp = head;
+    int index = 0;
+    while (tmp->Next()) {
+        for (int i = 0; i < head->getSize(); ++i) {
+            tmp->Next()->updateOwnKey(i, keys[index]);
+        }
+        tmp = tmp->Next();
+        index++;
     }
 }
 

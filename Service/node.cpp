@@ -20,6 +20,7 @@ string Node<T>::getType() {
 
 template<class T>
 Node<T>::Node() {
+    setDataId(setId());
     status = false;
     if (hasTeacherWriten) {
         setOwnKeys();
@@ -71,6 +72,8 @@ void Node<T>::read() {
     if (!properties.isCompleted()) {
         cout << "未填完!" << endl;
     }
+    cout << "学生ID : " << studentId << endl;
+    cout << "姓名 : " << studentName << endl;
     properties.read();
 }
 

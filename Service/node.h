@@ -5,6 +5,7 @@
 #ifndef KESHE_2_CPP_NODE_H
 #define KESHE_2_CPP_NODE_H
 #include "../Util/map.h"
+#include "../Util/setId.h"
 
 /*
  * 对于类：
@@ -16,10 +17,16 @@
  *      获取键的个数
  *      判断辅导员是否已经填写过属性
  * 对于对象：
+ *      获取所有值
  *      获取当前通过状态
  *      审核通过
  *      获取Node类型
  *      设置id(在Utils中设计算法)
+ *      获取id
+ *      设置学生id
+ *      获取学生id
+ *      设置学生姓名
+ *      获取学生姓名
  *      填写值
  *      根据键的下标，填写值
  *      查询所有键值对
@@ -48,12 +55,17 @@ public:
     void updateOwnKey(int index, string key);
     void removeOwnKey(int index);
 
+    string getDataId() { return dataId; }
+    string getStudentId() { return studentId; }
+    string getStudentName() { return studentName; }
     void setDataId(string id) { dataId = id; }
     void setStudentId(string id) { studentId = id; }
+    void setStudentName(string name) { studentName = name; }
     void setNext(Node *newNext) { next = newNext; }
     void setPrior(Node *newPrior) { prior = newPrior; }
     Node *Next() { return next; }
     Node *Prior() { return prior; }
+    vector<string> getValues() { return properties.getValues(); }
 
     static void setKeys(vector<string> input);
     static void addKey(string key);
@@ -72,6 +84,7 @@ private:
     static vector<string> keys;
     string dataId;
     string studentId;
+    string studentName;
     bool status;// 审核状态
     Map properties;
     Node *next;

@@ -13,9 +13,11 @@ using namespace std;
 /*
  * 提供辅导员输入属性的接口
  * 提供学生输入属性值的接口
+ * 获取到某一个节点的接口
 
  * 提供辅导员审核的接口
  * 提供辅导员增加属性的接口
+ * 提供直接增加属性的接口
  * 提供辅导员查询所有属性名称的接口
  * 提供辅导员更新属性值的接口
  * 提供辅导员删除属性值接口
@@ -30,15 +32,23 @@ class List {
 public:
     List();
     ~List();
+    Data *getNode(int index);
+    vector<string> getKeys();
+
+    int getLength();
+
     void add();
+    void add(Data &newNode);
     void read();
     void read(int index);
     void update(int index);
     void remove(int index);
 
+    void add(vector<string> keys);
     void add(bool isAssistant);
     void read(bool isAssistant);
     void update(bool isAssistant);
+    void update(vector<string> keys);
     void remove(bool isAssistant);
 
     void verify();

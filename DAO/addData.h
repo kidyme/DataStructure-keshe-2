@@ -5,6 +5,7 @@
 #ifndef KESHE_2_CPP_ADDDATA_H
 #define KESHE_2_CPP_ADDDATA_H
 #include "../Service/list.h"
+#include <fstream>
 
 /*
  * 提供创建文件的接口
@@ -20,11 +21,15 @@ public:
 
     void create();
     void addColumnTitle();
-    void add(DataType* dataType);
+    void addColumnTitle(vector<string> &keys);
+    void add(Data *data);
 
 private:
+    ofstream file;
     DataType *dataType;
     const string packagePath = "/Users/apple/Documents/数据结构/DataStructure-keshe-2/Data/";
+    string filePath;
+    const string division = "|";// 一个tab为八个空格
 };
 
 

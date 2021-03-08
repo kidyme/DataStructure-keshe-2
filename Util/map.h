@@ -11,6 +11,7 @@
 using namespace std;
 /* 键值对集合
  *
+ *      获取所有值
  *      为键的集合赋值
  *      为值的集合赋值
  *      在键的集合中增加一个键
@@ -28,6 +29,8 @@ public:
     void addKey(string key);
     void updateKey(int index, string key);
     void removeKey(int index);
+
+    vector<string> getValues() { return values; }
 
     void setValues(vector<string> input);
     void setValue(int index, string value);
