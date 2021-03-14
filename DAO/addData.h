@@ -21,7 +21,7 @@ public:
 
     void create();
     void addColumnTitle();
-    void addColumnTitle(vector<string> &keys);
+    void addColumnTitle(vector<string> keys);
     void add(Data *data);
 
 private:

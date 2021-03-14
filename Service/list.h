@@ -42,6 +42,7 @@ public:
     void read();
     void read(int index);
     void update(int index);
+    void update(Data *node);
     void remove(int index);
 
     void add(vector<string> keys);

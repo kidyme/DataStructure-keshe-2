@@ -20,6 +20,7 @@ template<class DataType, class Data>
 void updateData<DataType, Data>::updateColumnTitle(vector<string> keys) {
     remove(filePath.c_str());
     list.update(keys);
+    addData->create();
     addData->addColumnTitle(keys);
     for (int i = 0; i < list.getLength(); ++i) {
         addData->add(list.getNode(i + 1));
@@ -27,4 +28,12 @@ void updateData<DataType, Data>::updateColumnTitle(vector<string> keys) {
 }
 
 template<class DataType, class Data>
-void updateData<DataType, Data>::updateRow(Data &data) {}
+void updateData<DataType, Data>::updateRow(Data &data) {
+    remove(filePath.c_str());
+    addData->create();
+    addData->addColumnTitle();
+    list.update(&data);
+    for (int i = 0; i < list.getLength(); ++i) {
+        addData->add(list.getNode(i + 1));
+    }
+}

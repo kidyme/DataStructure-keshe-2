@@ -44,7 +44,7 @@ void addData<DataType, Data>::addColumnTitle() {
 }
 
 template<class DataType, class Data>
-void addData<DataType, Data>::addColumnTitle(vector<string> &keys) {
+void addData<DataType, Data>::addColumnTitle(vector<string> keys) {
     file.open(filePath, ios::app);
 
     file << division << "Id" << division;

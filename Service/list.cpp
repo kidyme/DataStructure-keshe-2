@@ -168,6 +168,33 @@ void List<Data>::update(int index) {
 }
 
 template<class Data>
+void List<Data>::update(Data *node) {
+    Data *tmp = head;
+    while (tmp->Next()) {
+        if (tmp->Next()->getDataId() == node->getDataId()) {
+            Data *find = tmp->Next();
+            // 若为最后一个
+            if (!tmp->Next()->Next()) {
+                find->Prior()->setNext(node);
+                node->setPrior(find);
+                node->setNext(NULL);
+                delete find;
+                break;
+            }
+            else {
+                find->Prior()->setNext(node);
+                find->Next()->setPrior(node);
+                node->setPrior(find->Prior());
+                node->setNext(find->Next());
+                delete find;
+                break;
+            }
+        }
+        tmp = tmp->Next();
+    }
+}
+
+template<class Data>
 void List<Data>::remove(int index) {
     Data *tmp = head;
     for (int i = 0; i < index; ++i) {
@@ -245,9 +272,18 @@ void List<Data>::update(bool isAssistant) {
 
 template<class Data>
 void List<Data>::update(vector<string> keys) {
-    head->setKeys(keys);
-
     Data *tmp = head;
+    if (head->getSize() > keys.size()) {
+        while (tmp->Next()) {
+            for (int i = keys.size(); i < head->getSize(); ++i) {
+                tmp->Next()->removeOwnKey(i);
+            }
+            tmp = tmp->Next();
+        }
+    }
+
+    head->setKeys(keys);
+    tmp = head;
     int index = 0;
     while (tmp->Next()) {
         for (int i = 0; i < head->getSize(); ++i) {

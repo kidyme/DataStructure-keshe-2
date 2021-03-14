@@ -69,6 +69,7 @@ public:
     ~Copyright();
 };
 
+
 //-------------------------------------学科科技与竞赛-----------------------------------------------
 class SchoolCompetition : public Type {
 public:

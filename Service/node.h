@@ -37,6 +37,7 @@
  *      修改next和prior
  *      获取next和prior
  */
+
 template<class T>
 class Node {
 public:
