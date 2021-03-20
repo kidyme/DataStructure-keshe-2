@@ -24,6 +24,20 @@ Data *List<Data>::getNode(int index) {
 }
 
 template<class Data>
+int List<Data>::getIndex(string id) {
+    Data *tmp = head;
+    int index = 1;
+    while (tmp->Next()) {
+        if (tmp->Next()->getDataId() == id) {
+            return index;
+        }
+        index++;
+        tmp = tmp->Next();
+    }
+    return 0;
+}
+
+template<class Data>
 vector<string> List<Data>::getKeys() {
     return head->getKeys();
 }
@@ -178,6 +192,7 @@ void List<Data>::update(Data *node) {
                 find->Prior()->setNext(node);
                 node->setPrior(find);
                 node->setNext(NULL);
+                head->setPrior(node);
                 delete find;
                 break;
             }
@@ -200,7 +215,13 @@ void List<Data>::remove(int index) {
     for (int i = 0; i < index; ++i) {
         tmp = tmp->Next();
     }
-
+    // 最后一个
+    if (!tmp->Next()) {
+        tmp->Prior()->setNext(NULL);
+        head->setPrior(tmp->Prior());
+        delete tmp;
+        return;
+    }
     tmp->Prior()->setNext(tmp->Next());
     tmp->Next()->setPrior(tmp->Prior());
     delete tmp;
@@ -231,14 +252,27 @@ void List<Data>::add(bool isAssistant) {
         }
     }
     else {
-        cout << "请补充" << head->getType() << "的属性: " << endl;
+        cout << "请补充" << head->getType() << "的属性: (输入over结束)" << endl;
         string input;
-        cin >> input;
-        head->addKey(input);
+        vector<string> keys;
         Data *tmp = head;
-        while (tmp->Next()) {
-            tmp->Next()->addOwnKey(input);
 
+        while (true) {
+            if (!keys.empty() && keys[keys.size() - 1] == "over") {
+                break;
+            }
+            cin >> input;
+            keys.push_back(input);
+        }
+
+        for (int i = 0; i < keys.size() - 1; i++) {
+            head->addKey(keys[i]);
+        }
+
+        while (tmp) {
+            for (int i = 0; i < keys.size() - 1; i++) {
+                tmp->addOwnKey(keys[i]);
+            }
             tmp = tmp->Next();
         }
     }

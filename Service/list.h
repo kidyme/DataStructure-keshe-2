@@ -33,6 +33,7 @@ public:
     List();
     ~List();
     Data *getNode(int index);
+    int getIndex(string id);
     vector<string> getKeys();
 
     int getLength();

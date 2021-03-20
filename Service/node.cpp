@@ -2,6 +2,8 @@
 // Created by kidyme on 2021/2/20.
 //
 
+#ifndef KESHE_2_CPP_NODE_CPP
+#define KESHE_2_CPP_NODE_CPP
 #include "node.h"
 
 #include <utility>
@@ -107,3 +109,4 @@ void Node<T>::setKeys(vector<string> input) {
 
 template<class T>
 vector<string> Node<T>::getKeys() { return keys; }
+#endif

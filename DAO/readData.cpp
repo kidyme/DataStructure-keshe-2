@@ -2,6 +2,8 @@
 // Created by kidyme on 2021/3/5.
 //
 
+#ifndef KESHE_2_CPP_READDATA_CPP
+#define KESHE_2_CPP_READDATA_CPP
 #include "readData.h"
 
 template<class DataType, class Data>
@@ -67,3 +69,5 @@ template<class DataType, class Data>
 int readData<DataType, Data>::getLength() {
     return list->getLength();
 }
+
+#endif

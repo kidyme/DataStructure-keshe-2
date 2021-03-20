@@ -2,6 +2,8 @@
 // Created by kidyme on 2021/2/28.
 //
 
+#ifndef KESHE_2_CPP_UPDATEDATA_CPP
+#define KESHE_2_CPP_UPDATEDATA_CPP
 #include "addData.h"
 
 template<class DataType, class Data>
@@ -79,3 +81,5 @@ void addData<DataType, Data>::add(Data *data) {
     }
     file.close();
 }
+
+#endif
